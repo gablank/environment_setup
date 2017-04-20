@@ -6,6 +6,10 @@ APT_INSTALLABLES=(git g++ gcc cmake tmux htop zsh)
 
 # === END CONFIG ===
 
+DIRNAME=$(dirname "$0")
+cd "$DIRNAME"
+ROOT_DIR=$(pwd)
+
 is_installed() {
     which $1 > /dev/null
     echo $?
@@ -39,16 +43,23 @@ echo "Installing oh-my-zsh. You will be prompted for your password to change the
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
 echo "Installing zsh theme"
-if [ ! -d ".oh-my-zsh/themes/" ]; then
-    echo ".oh-my-zsh/themes/ does not exist!"
+if [ ! -d "$HOME/.oh-my-zsh/themes/" ]; then
+    echo "$HOME/.oh-my-zsh/themes/ does not exist!"
     exit 1
 fi
 
-echo "$(curl -fsSL -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/gablank/environment_setup/master/setup.sh)" > .oh-my-zsh/themes/awenhaug.zsh-theme
+echo "$(curl -fsSL -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/gablank/environment_setup/master/awenhaug.zsh-theme)" > "$HOME/.oh-my-zsh/themes/awenhaug.zsh-theme"
 
-if [ ! -f ".zshrc" ]; then
-    echo ".zshrc does not exist!"
+if [ ! -f "$HOME/.zshrc" ]; then
+    echo "$HOME/.zshrc does not exist!"
     exit 1
 fi
 
-cat .zshrc | sed s/ZSH_THEME=\"robbyrussell\"/ZSH_THEME=\"awenhaug\"/ > .zshrc
+TEMPFILE="$ROOT_DIR/zshrctmp"
+cat "$HOME/.zshrc" | sed s/ZSH_THEME=\"robbyrussell\"/ZSH_THEME=\"awenhaug\"/ > "$TEMPFILE" && mv "$TEMPFILE" "$HOME/.zshrc"
+
+if [ ! $? ]; then
+    echo "Something went wrong while trying to change the zsh theme."
+    echo "You can do this manually by changing the line ZSH_THEME in .zshrc"
+    exit 1
+fi
