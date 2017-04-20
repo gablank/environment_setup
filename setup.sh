@@ -6,7 +6,6 @@ APT_INSTALLABLES=(git g++ gcc cmake tmux htop zsh)
 
 # === END CONFIG ===
 
-
 is_installed() {
     which $1 > /dev/null
     echo $?
@@ -30,7 +29,7 @@ fi
 
 for var in "${APT_INSTALLABLES[@]}"
 do
-    if [ $(is_installed $var) ]; then
+    if [ ! $(is_installed $var) ]; then
         echo "Unable to install $var!"
         exit 1
     fi
