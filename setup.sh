@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
 #APT_INSTALLABLES="git g++ gcc cmake tmux htop zsh"
-APT_INSTALLABLES="tmux htop zsh"
+APT_INSTALLABLES="git tmux htop zsh"
 
 echo "Installing $APT_INSTALLABLES using apt-get..."
 
