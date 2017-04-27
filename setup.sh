@@ -28,7 +28,7 @@ done
 
 if [ "$APT_INSTALLABLES_STRING" != "" ]; then
     echo "Installing $APT_INSTALLABLES_STRING using apt-get..."
-    sudo apt-get install -y "$APT_INSTALLABLES_STRING"
+    sudo apt-get install -y $APT_INSTALLABLES_STRING
 fi
 
 for var in "${APT_INSTALLABLES[@]}"
