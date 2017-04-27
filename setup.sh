@@ -28,12 +28,12 @@ done
 
 if [ "$APT_INSTALLABLES_STRING" != "" ]; then
     echo "Installing $APT_INSTALLABLES_STRING using apt-get..."
-    sudo apt-get install -y "$APT_INSTALLABLES"
+    sudo apt-get install -y "$APT_INSTALLABLES_STRING"
 fi
 
 for var in "${APT_INSTALLABLES[@]}"
 do
-    if [ ! $(is_installed $var) ]; then
+    if [ ! $(is_installed $var -ne 0) ]; then
         echo "Unable to install $var!"
         exit 1
     fi
