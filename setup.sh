@@ -18,7 +18,7 @@ is_installed() {
 APT_INSTALLABLES_STRING=""
 for var in "${APT_INSTALLABLES[@]}"
 do
-    if [ $(is_installed $var) ]; then
+    if [ $(is_installed $var) -eq 0 ]; then
         echo "$var is already installed, skipping"
     else
         echo "$var is not installed, installing..."
