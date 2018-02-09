@@ -2,7 +2,7 @@
 
 # === CONFIG ===
 
-APT_INSTALLABLES=(git g++ gcc cmake tmux htop zsh)
+APT_INSTALLABLES=(git g++ gcc cmake tmux htop zsh ncdu)
 
 # === END CONFIG ===
 
